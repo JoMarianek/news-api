@@ -1,9 +1,9 @@
 interface SourcesApiResponse {
     status: string;
-    sources: Sources[];
+    sources: Source[];
 }
 
-interface Sources {
+interface Source {
     id: string;
     name: string;
     description: string;
@@ -14,3 +14,4 @@ interface Sources {
 }
 
 export default SourcesApiResponse;
+export {Source}
