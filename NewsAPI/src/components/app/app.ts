@@ -1,7 +1,11 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
+import NewsApiResponse from '../view/news/newsApiResponse';
+import SourcesApiResponse from '../view/sources/sourcesApiResponse';
 
 class App {
+    controller: AppController; /*this is a url so type string? */
+    view: AppView;
     constructor() {
         this.controller = new AppController();
         this.view = new AppView();
@@ -10,8 +14,8 @@ class App {
     start() {
         document
             .querySelector('.sources')
-            .addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data)));
-        this.controller.getSources((data) => this.view.drawSources(data));
+            ?.addEventListener('click', (e) => this.controller.getNews(e, (data: NewsApiResponse) => this.view.drawNews(data)));
+        this.controller.getSources((data: SourcesApiResponse) => this.view.drawSources(data));
     }
 }
 

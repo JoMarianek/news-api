@@ -19,3 +19,4 @@ interface Article {
 }
 
 export default NewsApiResponse
+export {Article}
