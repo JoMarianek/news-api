@@ -4,7 +4,7 @@ class AppLoader extends Loader {
     
     constructor() {
         let url = process.env.API_URL;
-        let apiKey =  process.env.API_KEY;
+        let apiKey = process.env.API_KEY;
         if(url && apiKey) {
             super(url, {
                 apiKey: apiKey,
