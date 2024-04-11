@@ -1,3 +1,5 @@
+import { ApiEndPoint } from './apiEndpoint';
+
 class Loader {
     baseLink: string;
     options: Options;
@@ -7,7 +9,7 @@ class Loader {
     }
 
     getResp<Type>(
-        { endpoint, options = {} }: { endpoint: string, options?: Options },
+        { endpoint, options = {} }: { endpoint: ApiEndPoint; options?: Options },
         callback: (data: Type) => void = () => {
             console.error('No callback for GET response');
         }
@@ -25,7 +27,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: Options, endpoint: string) {
+    makeUrl(options: Options, endpoint: ApiEndPoint) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -36,20 +38,18 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load<Type>(method: string, endpoint: string, callback: (data: Type) => void, options: Options = {}) {
+    load<Type>(method: string, endpoint: ApiEndPoint, callback: (data: Type) => void, options: Options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
             .then((data: Type) => callback(data))
             .catch((err) => console.error(err));
     }
-
 }
 
 type Options = {
     [keys: string]: string;
 };
 
-
 export default Loader;
-export type {Options};
+export type { Options };

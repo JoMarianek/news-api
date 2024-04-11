@@ -1,12 +1,13 @@
 import NewsApiResponse from '../view/news/newsApiResponse';
 import AppLoader from './appLoader';
 import SourcesApiResponse from '../view/sources/sourcesApiResponse';
+import { ApiEndPoint } from './apiEndpoint';
 
 class AppController extends AppLoader {
     getSources(callback: (data: SourcesApiResponse) => void) {
         super.getResp(
             {
-                endpoint: 'sources',
+                endpoint: ApiEndPoint.Sources,
             },
             callback
         );
@@ -19,11 +20,11 @@ class AppController extends AppLoader {
         while (target !== newsContainer && target !== null) {
             if (target.classList.contains('source__item')) {
                 const sourceId = target.getAttribute('data-source-id');
-                if ((newsContainer).getAttribute('data-source') !== sourceId && sourceId !== null) {
+                if (newsContainer.getAttribute('data-source') !== sourceId && sourceId !== null) {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp(
                         {
-                            endpoint: 'everything',
+                            endpoint: ApiEndPoint.Everything,
                             options: {
                                 sources: sourceId,
                             },
